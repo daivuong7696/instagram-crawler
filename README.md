@@ -35,6 +35,7 @@ python crawler.py posts -u cal_foodie -n 100 -o ./output
 python crawler.py posts_full -u cal_foodie -n 100 -o ./output
 python crawler.py profile -u cal_foodie -o ./output
 python crawler.py hashtag -t taiwan -o ./output
+python crawler.py photo-hashtag -t beauty -o /home/username/dataset 
 ```
 1. Choose mode `posts`, you will get url, content, first photo for each post; choose mode `posts_full`, you will get url, content, all photos, time, comments for each posts. Mode `posts_full` will take way longer than mode `posts`.
 1. Return default 100 hashtag posts(mode: hashtag) and all user's posts(mode: posts) if not specifying the number of post `-n`, `--number`.
