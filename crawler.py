@@ -13,7 +13,8 @@ from io import open
 import operator
 
 import sys, os, tempfile, logging
-
+reload(sys)
+sys.setdefaultencoding("utf-8")
 if sys.version_info >= (3,):
     import urllib.request as urllib2
     import urllib.parse as urlparse
@@ -127,7 +128,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Instagram Crawler',
                                      usage=usage())
     parser.add_argument('mode',
-                        help='options: [posts, posts_full, profile, hashtag, photo-hashtag]')
+                        help='options: [posts, posts_full, profile, hashtag, photo-hashtag, user-photos]')
     parser.add_argument('-n', '--number',
                         type=int,
                         help='number of returned posts')
@@ -149,6 +150,17 @@ if __name__ == '__main__':
                 args.debug
             ),
             args.output)
+    elif args.mode == 'user-photos':
+        arg_required('username')
+        download_photo(
+            get_posts_by_user(
+                args.username,
+                args.number,
+                args.mode == 'posts_full',
+                args.debug
+            ),
+            args.output,
+            args.username)
     elif args.mode == 'profile':
         arg_required('username')
         output(get_profile(args.username), args.output)
